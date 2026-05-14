@@ -212,11 +212,9 @@ export function ProductPageClient({ product, related }: { product: Product; rela
               <div className="flex items-baseline gap-3 pt-2 border-t border-vss-smoke pt-5">
                 <Price
                   amount={product.price}
-                  amountUSD={product.priceUSD}
                   oldPrice={product.oldPrice}
                   size="xl"
                   variant="highlight"
-                  showUSD
                 />
               </div>
 
