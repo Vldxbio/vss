@@ -4,7 +4,7 @@ import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import "./globals.css";
 
 const display = Space_Grotesk({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
