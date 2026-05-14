@@ -4,10 +4,12 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { translations } from "./translations";
 import type { Locale } from "@/types";
 
+type Translations = typeof translations.uk;
+
 interface LocaleContextValue {
   locale: Locale;
   setLocale: (l: Locale) => void;
-  t: typeof translations.uk;
+  t: Translations;
 }
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
@@ -36,7 +38,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t: translations[locale] }}>
+    <LocaleContext.Provider value={{ locale, setLocale, t: translations[locale] as Translations }}>
       {children}
     </LocaleContext.Provider>
   );

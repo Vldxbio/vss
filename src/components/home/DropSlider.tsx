@@ -163,10 +163,8 @@ export function DropSlider() {
                     </div>
                     <Price
                       amount={slide.fromPrice}
-                      amountUSD={slide.fromPriceUSD}
                       size="lg"
                       variant="highlight"
-                      showUSD
                     />
                     <span className="px-2 py-0.5 border border-vss-smoke text-[9px] font-mono tracking-widest text-vss-mist">
                       {slide.accent}

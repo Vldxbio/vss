@@ -32,19 +32,21 @@ export function useCatalogFilters() {
   }), [searchParams]);
 
   const updateFilter = useCallback(<K extends keyof CatalogFilters>(key: K, value: CatalogFilters[K]) => {
-    const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(searchParams.toString());
 
-    if (value === null || value === undefined || value === "" || value === false) {
-      params.delete(key);
-    } else if (Array.isArray(value)) {
-      if (value.length === 0) params.delete(key);
-      else params.set(key, value.join(","));
-    } else {
-      params.set(key, String(value));
-    }
+  if (value === null || value === undefined || value === false) {
+    params.delete(key);
+  } else if (Array.isArray(value)) {
+    if (value.length === 0) params.delete(key);
+    else params.set(key, value.join(","));
+  } else if (typeof value === "string" && value === "") {
+    params.delete(key);
+  } else {
+    params.set(key, String(value));
+  }
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [router, pathname, searchParams]);
+  router.push(`${pathname}?${params.toString()}`, { scroll: false });
+}, [router, pathname, searchParams]);
 
   const toggleArrayFilter = useCallback(<K extends "sizes" | "badges">(key: K, value: string) => {
     const current = filters[key] as string[];

@@ -107,18 +107,23 @@ export function PromoSlider() {
 
       <div className="relative" style={{ minHeight: "92px" }}>
         <AnimatePresence mode="sync" custom={dir} initial={false}>
-          <motion.div
-            key={slide.id}
-            custom={dir}
-            initial={(d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 })}
-            animate={{ x: 0, opacity: 1 }}
-            exit={(d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0 })}
-            transition={{
-              x: { duration: 0.8, ease: [0.32, 0.72, 0, 1] },
-              opacity: { duration: 0.5 },
-            }}
-            className="absolute inset-0 flex items-center gap-4 md:gap-5 px-4 md:px-5 py-3"
-          >
+  <motion.div
+    key={slide.id}
+    custom={dir}
+    variants={{
+      enter: (d: number) => ({ x: d > 0 ? "100%" : "-100%", opacity: 0 }),
+      center: { x: 0, opacity: 1 },
+      exit: (d: number) => ({ x: d > 0 ? "-100%" : "100%", opacity: 0 }),
+    }}
+    initial="enter"
+    animate="center"
+    exit="exit"
+    transition={{
+      x: { duration: 0.8, ease: [0.32, 0.72, 0, 1] },
+      opacity: { duration: 0.5 },
+    }}
+    className="absolute inset-0 flex items-center gap-4 md:gap-5 px-4 md:px-5 py-3"
+  >
             {/* Image circle */}
             <div className="relative w-[68px] h-[68px] md:w-[72px] md:h-[72px] rounded-full overflow-hidden bg-vss-void border border-vss-smoke shrink-0">
               <SafeImage src={slide.image} alt="" fill className="object-cover" sizes="72px" />
@@ -167,7 +172,6 @@ export function PromoSlider() {
               <Price
                 amount={slide.price}
                 oldPrice={slide.oldPrice}
-                amountUSD={slide.priceUSD}
                 size="md"
                 variant="highlight"
                 className="hidden md:inline-flex"
